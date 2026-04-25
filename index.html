@@ -535,23 +535,6 @@ footer {
 
 /* Void Tasks (Unique Design) */
 .tasks { display:flex; flex-direction:column; gap:8px; margin-bottom:32px; }
-.wl-closed-note {
-  margin-bottom:18px;
-  padding:14px 16px;
-  border:1px solid rgba(245,158,11,.35);
-  background:rgba(245,158,11,.08);
-  color:rgba(255,255,255,.88);
-  font-family:var(--fm);
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  line-height:1.7;
-}
-.tasks.closed {
-  pointer-events:none;
-  opacity:.55;
-  filter:grayscale(1);
-}
 .task {
   background:rgba(255,255,255,.01);
   border:1px solid rgba(255,255,255,.03);
@@ -764,12 +747,8 @@ footer {
 
     <div class="mo-body">
       <div id="form-view">
-        <div class="wl-closed-note">
-          Whitelist applications are now closed.<br/>
-          Stay tuned for the next announcement.
-        </div>
         <!-- Void Tasks -->
-        <div class="tasks closed" id="tasks-container">
+        <div class="tasks" id="tasks-container">
           <div class="task active" id="tk1">
             <div class="task-header" onclick="toggleTask(1)">
               <div class="task-n">I.</div>
@@ -783,8 +762,8 @@ footer {
                 <div class="task-ds">Link your soul to our frequency. Follow the official account.</div>
                 <a class="t-btn-go" href="https://x.com/TheShadesETH" target="_blank" rel="noopener" onclick="checkTaskGo(1)">FOLLOW ON X ↗</a>
                 <label class="t-input-label">YOUR X IDENTITY</label>
-                <input class="t-input" id="inp-1" type="text" placeholder="@yourhandle" oninput="checkInput(1)" disabled />
-                <button class="t-btn-next" id="btn-1" onclick="nextTask(1)" disabled>APPLICATION CLOSED</button>
+                <input class="t-input" id="inp-1" type="text" placeholder="@yourhandle" oninput="checkInput(1)" />
+                <button class="t-btn-next" id="btn-1" onclick="nextTask(1)" disabled>DONE'</button>
               </div>
             </div>
           </div>
@@ -800,9 +779,9 @@ footer {
             <div class="task-body" id="tb2">
               <div class="t-body-in">
                 <div class="task-ds">Like and RT the official mint announcement to widen the rift.</div>
-                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2045500225071026546?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(2)">LIKE & RT ↗</a>
+                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2046983573702312172?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(2)">LIKE & RT ↗</a>
                 <div style="height:4px;"></div>
-                <button class="t-btn-next" id="btn-2" onclick="nextTask(2)" disabled>APPLICATION CLOSED</button>
+                <button class="t-btn-next" id="btn-2" onclick="nextTask(2)" disabled>DONE'</button>
               </div>
             </div>
           </div>
@@ -818,10 +797,10 @@ footer {
             <div class="task-body" id="tb3">
               <div class="t-body-in">
                 <div class="task-ds">Comment on the tweet and paste your comment URL as proof of binding.</div>
-                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2045500225071026546?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(3)">COMMENT ↗</a>
+                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2046983573702312172?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(3)">COMMENT ↗</a>
                 <label class="t-input-label">YOUR COMMENT THREAD URL</label>
-                <input class="t-input" id="inp-3" type="url" placeholder="https://x.com/yourhandle/status/..." oninput="checkInput(3)" disabled />
-                <button class="t-btn-next" id="btn-3" onclick="nextTask(3)" disabled>APPLICATION CLOSED</button>
+                <input class="t-input" id="inp-3" type="url" placeholder="https://x.com/yourhandle/status/..." oninput="checkInput(3)" />
+                <button class="t-btn-next" id="btn-3" onclick="nextTask(3)" disabled>DONE'</button>
               </div>
             </div>
           </div>
@@ -838,8 +817,8 @@ footer {
               <div class="t-body-in">
                 <div class="task-ds">Paste your EVM-compatible wallet address. The darkness must know where to find you.</div>
                 <label class="t-input-label">WALLET ADDRESS (ETH)</label>
-                <input class="t-input" id="inp-4" type="text" placeholder="0x..." oninput="checkInput(4)" disabled />
-                <button class="t-btn-next t-btn-final" id="btn-4" onclick="submitFinal(event)" disabled>APPLICATION CLOSED</button>
+                <input class="t-input" id="inp-4" type="text" placeholder="0x..." oninput="checkInput(4)" />
+                <button class="t-btn-next t-btn-final" id="btn-4" onclick="submitFinal(event)" disabled>JOIN SHADESLIST</button>
                 <div class="form-err" id="form-err">⚠ Please enter a valid wallet.</div>
               </div>
             </div>
@@ -850,10 +829,10 @@ footer {
       <!-- Success -->
       <div class="suc" id="suc">
         <div class="suc-ico"><img src="img/img (1).png" alt="Shades icon"/></div>
-        <div class="suc-ti">WHITELIST APPLICATIONS CLOSED</div>
+        <div class="suc-ti">YOU ARE IN SHADESLIST</div>
         <p class="suc-p">
-          We are no longer accepting responses.<br/>
-          <br/>Stay tuned.
+          Your application has been received.<br/>
+          <br/>Stay close.
         </p>
       </div>
     </div>
@@ -1026,7 +1005,6 @@ document.querySelectorAll('.tr-card').forEach(card => {
 
 /* ════════════════ TASK TRACKING & ACCORDION ════════════════ */
 let currentTask = 1;
-const WL_APPLICATION_OPEN = false;
 const taskStates = {
   1: { clicked: false, val: '' },
   2: { clicked: false },
@@ -1075,13 +1053,11 @@ function openTask(n) {
 }
 
 function checkTaskGo(n) {
-  if (!WL_APPLICATION_OPEN) return;
   taskStates[n].clicked = true;
   checkInput(n);
 }
 
 function checkInput(n) {
-  if (!WL_APPLICATION_OPEN) return;
   const btn = document.getElementById('btn-'+n);
   if(!btn) return;
   
@@ -1115,7 +1091,6 @@ function checkInput(n) {
 }
 
 function nextTask(n) {
-  if (!WL_APPLICATION_OPEN) return;
   const t = document.getElementById('tk'+n);
   t.classList.add('done');
   document.getElementById('ts'+n).innerText = 'SEALED';
@@ -1134,7 +1109,6 @@ function openMo() {
   document.getElementById('form-view').style.display = '';
   document.getElementById('suc').classList.remove('show');
   document.getElementById('form-err').classList.remove('show');
-  if (!WL_APPLICATION_OPEN) return;
   
   currentTask = 1;
   const btn4 = document.getElementById('btn-4');
@@ -1169,12 +1143,6 @@ async function submitFinal(e) {
   if(e) e.preventDefault();
   const errEl = document.getElementById('form-err');
   const btnEl = document.getElementById('btn-4');
-  if (!WL_APPLICATION_OPEN) {
-    errEl.textContent = '⚠ Whitelist applications are closed.';
-    errEl.classList.add('show');
-    btnEl.disabled = true;
-    return;
-  }
   
   if(!document.getElementById('tk1').classList.contains('done') || 
      !document.getElementById('tk2').classList.contains('done') || 
