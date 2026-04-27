@@ -151,16 +151,13 @@ nav.compact {
 .btn-nav {
   padding:11px 26px;
   font-family:var(--fb); font-size:11px; font-weight:600; letter-spacing:2px;
-  text-transform:uppercase; border:1px solid var(--teal);
-  background:transparent; color:var(--teal); border-radius:3px;
+  text-transform:uppercase; border:1px solid rgba(255,255,255,.15);
+  background:transparent; color:rgba(255,255,255,.3); border-radius:3px;
   transition:all .25s ease; position:relative; overflow:hidden;
+  cursor:not-allowed !important;
 }
-.btn-nav::before {
-  content:''; position:absolute; inset:0;
-  background:var(--teal); transform:translateX(-101%); transition:transform .25s ease; z-index:-1;
-}
-.btn-nav:hover { color:#000; }
-.btn-nav:hover::before { transform:translateX(0); }
+.btn-nav::before { display:none; }
+.btn-nav:hover { color:rgba(255,255,255,.3); }
 
 /* ══════════════════════════════════════════════════════
    HERO
@@ -269,8 +266,8 @@ nav.compact {
   font-family:var(--fb); font-size:12px; font-weight:700; letter-spacing:2.5px;
   text-transform:uppercase; background:var(--teal); color:#000;
   border:none; border-radius:4px; overflow:hidden; position:relative;
-  box-shadow:0 0 40px rgba(0,221,168,.18);
-  transition:all .3s ease;
+  box-shadow:0 0 40px rgba(0,221,168,.22); transition:all .3s ease;
+  text-decoration:none; display:inline-flex; align-items:center; gap:10px;
 }
 .btn-primary::after {
   content:''; position:absolute; top:0; left:-100%;
@@ -278,7 +275,7 @@ nav.compact {
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.28),transparent);
   transition:left .5s ease;
 }
-.btn-primary:hover { transform:translateY(-3px); background:var(--teal2); box-shadow:0 10px 50px rgba(0,221,168,.38); }
+.btn-primary:hover { transform:translateY(-3px); background:var(--teal2); box-shadow:0 10px 50px rgba(0,221,168,.4); }
 .btn-primary:hover::after { left:100%; }
 .btn-ghost {
   padding:17px 48px;
@@ -683,7 +680,7 @@ footer {
   <div class="nav-r">
     
     <a class="nav-ln" href="https://x.com/TheShadesETH" target="_blank" rel="noopener">Twitter</a>
-    <button class="btn-nav" onclick="openMo()">Apply WL</button>
+    <button class="btn-nav" disabled title="Applications are closed">WL Closed</button>
   </div>
 </nav>
 
@@ -713,7 +710,10 @@ footer {
     </p>
 
     <div class="h-cta">
-      <button class="btn-primary" onclick="openMo()">Apply for Whitelist</button>
+      <a class="btn-primary" href="https://opensea.io/collection/shadesofnothing/overview" target="_blank" rel="noopener">
+        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.374 0 12s5.374 12 12 12 12-5.374 12-12S18.629 0 12 0ZM6.022 12.896l.029-.046 3.172-4.952a.073.073 0 0 1 .128.01c.528 1.17.983 2.623.77 3.525-.09.378-.34.889-.62 1.365a2.44 2.44 0 0 1-.122.2.072.072 0 0 1-.06.032H6.083a.073.073 0 0 1-.061-.134Zm13.88 1.742a.074.074 0 0 1-.044.068c-.29.12-1.28.557-1.692 1.107-.418.563-1.378 2.197-1.687 2.197H8.46a4.574 4.574 0 0 1-4.57-4.57v-.079c0-.04.032-.073.073-.073h3.483c.047 0 .082.041.078.087a1.51 1.51 0 0 0 .158.796c.27.526.809.853 1.389.853h2.185v-1.682H9.1a.075.075 0 0 1-.061-.117c.013-.019.027-.038.042-.06.35-.49.855-1.25 1.358-2.127.337-.578.665-1.198.916-1.82.05-.117.09-.235.127-.35.066-.21.133-.407.173-.6a5.7 5.7 0 0 0 .09-.6 7.495 7.495 0 0 0-.014-1.278c-.02-.183-.065-.354-.101-.53-.04-.189-.093-.374-.148-.554a5.915 5.915 0 0 0-.166-.448l-.23-.57a.074.074 0 0 1 .085-.101l1.435.39c.04.01.077.025.11.047l.05.033.06.04v-2.37a.73.73 0 1 1 1.46 0v1.707l.42.18a.077.077 0 0 1 .02.013c.095.08.193.173.287.278.237.263.47.587.648.913.357.655.568 1.438.568 2.356 0 .62-.118 1.263-.337 1.818a7.05 7.05 0 0 1-.52 1.047c-.122.2-.25.393-.38.576h.951a1.54 1.54 0 0 0 1.539-1.539v-.015c0-.04.032-.073.073-.073h1.917a.073.073 0 0 1 .073.073c0 2.52-2.04 4.56-4.56 4.56h-1.296c.007.014.007.029 0 .043v2.044h1.954c.22 0 .748-.22 1.297-.727.29-.27.577-.604.836-.975a.074.074 0 0 1 .064-.032h2.764c.04 0 .073.033.073.073Z"/></svg>
+        Mint Now
+      </a>
       <button class="btn-ghost" onclick="window.open('https://x.com/TheShadesETH','_blank')">Follow on Twitter</button>
     </div>
 
@@ -746,8 +746,8 @@ footer {
     </div>
 
     <div class="mo-body">
-      <div id="form-view">
-        <!-- Void Tasks -->
+      <div id="form-view" style="display:none">
+        <!-- Void Tasks (CLOSED) -->
         <div class="tasks" id="tasks-container">
           <div class="task active" id="tk1">
             <div class="task-header" onclick="toggleTask(1)">
@@ -779,7 +779,7 @@ footer {
             <div class="task-body" id="tb2">
               <div class="t-body-in">
                 <div class="task-ds">Like and RT the official mint announcement to widen the rift.</div>
-                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2048154646720512219?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(2)">LIKE & RT ↗</a>
+                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2045500225071026546?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(2)">LIKE & RT ↗</a>
                 <div style="height:4px;"></div>
                 <button class="t-btn-next" id="btn-2" onclick="nextTask(2)" disabled>DONE'</button>
               </div>
@@ -797,7 +797,7 @@ footer {
             <div class="task-body" id="tb3">
               <div class="t-body-in">
                 <div class="task-ds">Comment on the tweet and paste your comment URL as proof of binding.</div>
-                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2048154646720512219?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(3)">COMMENT ↗</a>
+                <a class="t-btn-go" href="https://x.com/TheShadesETH/status/2045500225071026546?s=20" target="_blank" rel="noopener" onclick="checkTaskGo(3)">COMMENT ↗</a>
                 <label class="t-input-label">YOUR COMMENT THREAD URL</label>
                 <input class="t-input" id="inp-3" type="url" placeholder="https://x.com/yourhandle/status/..." oninput="checkInput(3)" />
                 <button class="t-btn-next" id="btn-3" onclick="nextTask(3)" disabled>DONE'</button>
@@ -826,14 +826,24 @@ footer {
         </div>
       </div>
 
-      <!-- Success -->
-      <div class="suc" id="suc">
-        <div class="suc-ico"><img src="img/img (1).png" alt="Shades icon"/></div>
-        <div class="suc-ti">YOU ARE IN SHADESLIST</div>
-        <p class="suc-p">
-          Your application has been received.<br/>
-          <br/>Stay close.
+      <!-- Closed Notice -->
+      <div class="suc show" id="suc" style="padding:70px 40px 80px;">
+        <div class="suc-ico" style="border-color:rgba(0,221,168,.3);background:rgba(0,221,168,.07);box-shadow:0 0 40px rgba(0,221,168,.1);">
+          <img src="logo.jpg" alt="Shades icon" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>
+        </div>
+        <div class="suc-ti" style="color:var(--teal);font-size:16px;letter-spacing:6px;margin-bottom:10px;">WE ARE LIVE</div>
+        <div style="font-family:var(--fh);font-size:11px;letter-spacing:4px;color:rgba(255,255,255,.3);margin-bottom:28px;">THE MINT IS OPEN</div>
+        <p class="suc-p" style="max-width:360px;margin:0 auto 32px;">
+          The Shadeslist is sealed — we are no longer accepting new applications.<br/><br/>
+          The collection is now live on OpenSea.
         </p>
+        <a href="https://opensea.io/collection/shadesofnothing/overview" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:10px;background:var(--teal);color:#000;padding:16px 40px;border-radius:4px;font-family:var(--fb);font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;text-decoration:none;box-shadow:0 0 30px rgba(0,221,168,.28);transition:all .3s ease;"
+           onmouseover="this.style.background='var(--teal2)';this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='var(--teal)';this.style.transform='none'">
+          <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.374 0 12s5.374 12 12 12 12-5.374 12-12S18.629 0 12 0ZM6.022 12.896l.029-.046 3.172-4.952a.073.073 0 0 1 .128.01c.528 1.17.983 2.623.77 3.525-.09.378-.34.889-.62 1.365a2.44 2.44 0 0 1-.122.2.072.072 0 0 1-.06.032H6.083a.073.073 0 0 1-.061-.134Zm13.88 1.742a.074.074 0 0 1-.044.068c-.29.12-1.28.557-1.692 1.107-.418.563-1.378 2.197-1.687 2.197H8.46a4.574 4.574 0 0 1-4.57-4.57v-.079c0-.04.032-.073.073-.073h3.483c.047 0 .082.041.078.087a1.51 1.51 0 0 0 .158.796c.27.526.809.853 1.389.853h2.185v-1.682H9.1a.075.075 0 0 1-.061-.117c.013-.019.027-.038.042-.06.35-.49.855-1.25 1.358-2.127.337-.578.665-1.198.916-1.82.05-.117.09-.235.127-.35.066-.21.133-.407.173-.6a5.7 5.7 0 0 0 .09-.6 7.495 7.495 0 0 0-.014-1.278c-.02-.183-.065-.354-.101-.53-.04-.189-.093-.374-.148-.554a5.915 5.915 0 0 0-.166-.448l-.23-.57a.074.074 0 0 1 .085-.101l1.435.39c.04.01.077.025.11.047l.05.033.06.04v-2.37a.73.73 0 1 1 1.46 0v1.707l.42.18a.077.077 0 0 1 .02.013c.095.08.193.173.287.278.237.263.47.587.648.913.357.655.568 1.438.568 2.356 0 .62-.118 1.263-.337 1.818a7.05 7.05 0 0 1-.52 1.047c-.122.2-.25.393-.38.576h.951a1.54 1.54 0 0 0 1.539-1.539v-.015c0-.04.032-.073.073-.073h1.917a.073.073 0 0 1 .073.073c0 2.52-2.04 4.56-4.56 4.56h-1.296c.007.014.007.029 0 .043v2.044h1.954c.22 0 .748-.22 1.297-.727.29-.27.577-.604.836-.975a.074.074 0 0 1 .064-.032h2.764c.04 0 .073.033.073.073Z"/></svg>
+          Mint on OpenSea
+        </a>
       </div>
     </div>
   </div>
@@ -1005,6 +1015,7 @@ document.querySelectorAll('.tr-card').forEach(card => {
 
 /* ════════════════ TASK TRACKING & ACCORDION ════════════════ */
 let currentTask = 1;
+const WL_APPLICATION_OPEN = true;
 const taskStates = {
   1: { clicked: false, val: '' },
   2: { clicked: false },
